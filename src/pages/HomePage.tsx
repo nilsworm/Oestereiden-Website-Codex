@@ -1,9 +1,10 @@
 import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowDown, ArrowRight, ChevronRight, MapPin, UsersRound } from 'lucide-react';
+import { ArrowDown, ArrowRight, CalendarDays, ChevronRight, Clock3, MapPin, UsersRound } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { board, departmentLeads, departments, sponsors } from '../content/site';
-import { ContactDetails, EmptyState, Eyebrow, SectionHeading } from '../components/PageParts';
+import { ContactDetails, Eyebrow, SectionHeading } from '../components/PageParts';
 import { Reveal } from '../components/Reveal';
+import { knowledgeMeta, upcomingEvents } from '../content/susKnowledge';
 
 const gallery = [
   { image: '/media/football-training.jpg', label: 'Fußball', className: 'md:col-span-7' },
@@ -28,7 +29,7 @@ export function HomePage() {
       </div>
     </section>
 
-    <section className="py-20 md:py-32"><SectionHeading eyebrow="Termine & Neuigkeiten" title="Was als Nächstes ansteht." copy="Termine, Spielberichte und Vereinsnachrichten werden hier laufend ergänzt." /><div className="mx-auto mt-10 max-w-[96rem] px-5 md:mt-14 md:px-8 xl:px-12"><Reveal><EmptyState title="Wird aktualisiert" copy="Aktuelle Termine und Neuigkeiten folgen bald." /></Reveal></div></section>
+    <section id="termine" className="py-20 md:py-32"><SectionHeading eyebrow="Termine & Neuigkeiten" title="Was als Nächstes ansteht." copy={`Aktualisiert: ${knowledgeMeta.updated}.`} /><div className="mx-auto mt-10 grid max-w-[96rem] gap-3 px-5 md:mt-14 md:grid-cols-2 xl:grid-cols-4 md:px-8 xl:px-12">{upcomingEvents.map((event, index) => <Reveal key={event.date + event.title} delay={index * .05}><article className="flex min-h-48 flex-col justify-between border border-[var(--rule)] p-5"><div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[.09em] text-[var(--blue)]"><CalendarDays size={15} />{event.date}</div><div><h3 className="text-xl font-medium tracking-[-.04em]">{event.title}</h3><p className="mt-3 flex items-center gap-2 text-sm text-[var(--muted)]"><Clock3 size={14} />{event.time}</p><p className="mt-1 flex items-center gap-2 text-sm text-[var(--muted)]"><MapPin size={14} />{event.place}</p></div></article></Reveal>)}</div><p className="mx-auto mt-5 max-w-[96rem] px-5 text-xs text-[var(--muted)] md:px-8 xl:px-12">Hinweis: {knowledgeMeta.status} für die Vorstellung.</p></section>
 
     <section className="border-y border-[var(--rule)] bg-[var(--surface-muted)] py-20 md:py-32"><div className="mx-auto grid max-w-[96rem] gap-12 px-5 md:grid-cols-[1.1fr_.9fr] md:items-end md:px-8 xl:px-12"><Reveal><Eyebrow>Seit über 100 Jahren für die Region</Eyebrow><h2 className="section-title mt-4">Sport ist hier mehr als Bewegung.</h2><p className="mt-6 max-w-xl text-base leading-7 text-[var(--muted)] md:text-lg">1922 gegründet, heute mit über 860 Mitgliedern der größte Verein im Stadtgebiet Rüthen: Wir schaffen Raum für Sport, Begegnung und Gemeinschaft – für jedes Alter.</p></Reveal><Reveal delay={0.1}><dl className="grid grid-cols-2 border-l border-t border-[var(--rule)]"><Stat value="1922" label="Gegründet" /><Stat value="860+" label="Mitglieder" /><Stat value="4" label="Abteilungen" /><Stat value="Rüthen" label="Standort" /></dl></Reveal></div></section>
 

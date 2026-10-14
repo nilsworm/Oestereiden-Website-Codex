@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { contact, departments } from '../content/site';
 import { useTheme } from './theme-context';
+import { SusAi } from './SusAi';
 
 const navItems = departments.map(({ name, slug }) => ({ name, to: `/${slug}` }));
 
@@ -61,6 +62,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         saveConsent={saveConsent}
       />
       <ToastRegion toast={toast} />
+      <SusAi />
     </div>
   );
 }
